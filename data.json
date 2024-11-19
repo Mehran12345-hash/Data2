@@ -1,55 +1,26 @@
-{
-    "categories": [
-      {
-        "id": 1,
-        "name": "Education",
-        "description": "Resources for learning and teaching."
-      },
-      {
-        "id": 2,
-        "name": "Technology",
-        "description": "Latest trends in tech."
-      },
-      {
-        "id": 3,
-        "name": "Health",
-        "description": "Tips and resources for a healthy lifestyle."
-      },
-      {
-        "id": 4,
-        "name": "Travel",
-        "description": "Guides and tips for traveling."
-      },
-      {
-        "id": 5,
-        "name": "Sports",
-        "description": "Updates and insights on various sports."
-      },
-      {
-        "id": 6,
-        "name": "Entertainment",
-        "description": "Movies, music, and more."
-      },
-      {
-        "id": 7,
-        "name": "Business",
-        "description": "News and resources for entrepreneurs."
-      },
-      {
-        "id": 8,
-        "name": "Science",
-        "description": "Discoveries and innovations in science."
-      },
-      {
-        "id": 9,
-        "name": "Food",
-        "description": "Recipes and culinary tips."
-      },
-      {
-        "id": 10,
-        "name": "Lifestyle",
-        "description": "Trends and advice for everyday living."
-      }
-    ]
+const apiUrl = "https://raw.githubusercontent.com/Mehran12345-hash/Data2/refs/heads/main/data.json";
+
+async function fetchCategories() {
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    displayCategories(data.categories);
+  } catch (error) {
+    console.error("Error fetching data:", error);
   }
-  
+}
+
+function displayCategories(categories) {
+  const categoriesContainer = document.getElementById("categories");
+  categories.forEach(category => {
+    const categoryDiv = document.createElement("div");
+    categoryDiv.classList.add("category");
+    categoryDiv.innerHTML = `
+      <h2>${category.name}</h2>
+      <p>${category.description}</p>
+    `;
+    categoriesContainer.appendChild(categoryDiv);
+  });
+}
+
+fetchCategories();
